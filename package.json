@@ -11,7 +11,8 @@
     "lodash.debounce": "^4.0.8",
     "react": "^15.1.0",
     "react-codemirror": "^0.3.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "socket.io-client": "^1.7.3"
   },
   "devDependencies": {
     "atool-build": "^0.7.6",

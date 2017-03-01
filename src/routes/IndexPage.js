@@ -3,11 +3,12 @@ import { connect } from 'dva';
 import { Link } from 'dva/router';
 import styles from './IndexPage.less';
 //import Ex from '../components/example'
-import {withRouter } from 'dva/router';
+import { withRouter } from 'dva/router';
 import { message, notification, Modal, Form, Input, Button, Row, Col, Menu, Dropdown, Icon } from 'antd';
 const createForm = Form.create;
 const FormItem = Form.Item;
 const ButtonGroup = Button.Group;
+
 
 function noop() {
     return false;
@@ -53,7 +54,7 @@ var LoginForm = React.createClass({
                     label="用户名"
                     hasFeedback
                     help={isFieldValidating('userName') ? '校验中...' : (getFieldError('userName') || []).join(', ')}
-                    >
+                >
                     {getFieldDecorator('userName', {
                         rules: [
                             { required: true, message: '请填写用户名' },
@@ -65,7 +66,7 @@ var LoginForm = React.createClass({
                     {...formItemLayout}
                     label="密码"
                     hasFeedback
-                    >
+                >
                     {getFieldDecorator('password', {
                         rules: [
                             { required: true, whitespace: true, message: '请填写密码' },
@@ -92,27 +93,33 @@ class IndexPage extends Component {
         this.props.dispatch({
             type: 'users/checkLogin'
         });
+        if(Notification!=null){
+            Notification.requestPermission( function(status) {});
+        }
+        
+
+        
     }
     render() {
         var temp;
-      
+
         if (this.props.users.isLogin) {
-            temp = <div style={{float:'right'}}><label>欢迎您</label>&nbsp;&nbsp;<Dropdown overlay={<Menu>
+            temp = <div style={{ float: 'right' }}><label>欢迎您</label>&nbsp;&nbsp;<Dropdown overlay={<Menu>
                 <Menu.Item>
                     <a href="#/main" onClick={() => {
-                       // location.href="#/main";
-                     //   this.context.router.push('main')
-                     //  console.log(this);
+                        // location.href="#/main";
+                        //   this.context.router.push('main')
+                        //  console.log(this);
 
-                       
-                    } }>进入后台</a>
+
+                    }}>进入后台</a>
                 </Menu.Item>
-                 <Menu.Item>
+                <Menu.Item>
                     <a href="#" onClick={() => {
                         this.props.dispatch({
                             type: 'users/exitLogin'
                         });
-                    } }>退出</a>
+                    }}>退出</a>
                 </Menu.Item>
             </Menu>}>
                 <Button type="ghost" style={{ marginLeft: 8 }}>
@@ -120,19 +127,19 @@ class IndexPage extends Component {
                 </Button>
             </Dropdown></div>
         } else {
-            temp = <div style={{float:'right'}}><ButtonGroup>
+            temp = <div style={{ float: 'right' }}><ButtonGroup>
                 <Button type="ghost" onClick={() => {
                     this.props.dispatch({
                         type: 'users/updateLoginVisible',
                         payload: { loginVisible: true }
                     })
-                } }>登录</Button>&nbsp;<Button type="ghost">注册</Button>
+                }}>登录</Button>&nbsp;<Button type="ghost">注册</Button>
             </ButtonGroup></div>
         }
         return (<div>
             <Row type="flex" className={styles.bg} align="middle">
 
-                <Col xs={{ span: 11,offset :1}} lg={{ span: 8, offset: 4 }}><h1>平台</h1></Col>
+                <Col xs={{ span: 11, offset: 1 }} lg={{ span: 8, offset: 4 }}><h1>平台</h1></Col>
                 <Col xs={{ span: 11 }} lg={{ span: 4, offset: 3 }} >
                     {temp}
                 </Col>
@@ -144,7 +151,7 @@ class IndexPage extends Component {
                     type: 'users/updateLoginVisible',
                     payload: { loginVisible: false }
                 })
-            } }>
+            }}>
                 <LoginForm />
             </Modal>
         </div >
@@ -156,7 +163,7 @@ class IndexPage extends Component {
 //       router: React.PropTypes.object.isRequired
 // };
 IndexPage.contextTypes = {
-  router: React.PropTypes.object.isRequired
+    router: React.PropTypes.object.isRequired
 };
 
 

